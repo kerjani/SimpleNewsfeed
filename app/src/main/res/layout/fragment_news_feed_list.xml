@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.apps.simplenewsfeed.ui.main.NewsFeedViewModel" />
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/swipeRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:onRefreshListener="@{() -> viewModel.getItems(true)}"
+        app:refreshing="@{viewModel.isLoading}"
+        tools:context=".ui.main.NewsFeedFragment">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:background="@color/feed_background"
+                android:id="@+id/itemList"
+                android:name="com.apps.simplenewsfeed.ui.main.NewsFeedFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="LinearLayoutManager"
+                tools:listitem="@layout/item_news" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</layout>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.apps.simplenewsfeed.data.models.Item" />
+
+        <variable
+            name="clickListener"
+            type="com.apps.simplenewsfeed.util.AdClickedListener" />
+
+        <import type="android.view.View" />
+
+        <import type="com.apps.simplenewsfeed.util.Constants" />
+
+        <import type="android.text.TextUtils" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            style="@style/NewsItemAdContainerStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> clickListener.onAdClicked(item)}"
+            android:orientation="horizontal"
+            android:visibility="@{item.type.equals(Constants.AD) ? View.VISIBLE : View.GONE}">
+
+            <TextView
+                style="@style/NewsItemAdTypeStyle"
+                android:id="@+id/type"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <TextView
+                style="@style/NewsItemAdTtileSytle"
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@{item.title}"
+                tools:text="The link of ad" />
+        </LinearLayout>
+
+        <ImageView
+            style="@style/NewsItemImageStyle"
+            android:id="@+id/item_image"
+            imageUrl="@{item.url}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{item.type.equals(Constants.IMAGE) ? View.VISIBLE : View.GONE}" />
+
+        <LinearLayout
+            style="@style/NewsItemNewsContainerStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="@{item.type.equals(Constants.NEWS) &amp;&amp; TextUtils.isEmpty(item.style) ? View.VISIBLE : View.GONE}">
+
+            <TextView
+                style="@style/NewsItemNewsTitleStyle"
+                android:id="@+id/news_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{item.title}"
+                android:visibility="@{TextUtils.isEmpty(item.title) ? View.GONE : View.VISIBLE}"
+                tools:text="News title" />
+
+            <TextView
+                style="@style/NewsItemNewsSubtitleStyle"
+                android:id="@+id/news_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{item.subtitle}"
+                android:visibility="@{TextUtils.isEmpty(item.subtitle) ? View.GONE : View.VISIBLE}"
+                tools:text="@string/lorem" />
+
+            <TextView
+                style="@style/NewsItemNewsDateStyle"
+                android:id="@+id/news_date"
+                timeAgo="@{item.lastModified}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="@{TextUtils.isEmpty(item.lastModified) ? View.GONE : View.VISIBLE}"
+                tools:text="Yesterday" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/NewsItemBreakingContainerStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="@{item.type.equals(Constants.NEWS) &amp;&amp; item.style.equals(Constants.BREAKING) ? View.VISIBLE : View.GONE}">
+
+            <TextView
+                style="@style/NewsItemBreakingTitleStyle"
+                android:id="@+id/breaking_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@{item.title}"
+                android:visibility="@{TextUtils.isEmpty(item.title) ? View.GONE : View.VISIBLE}"
+                tools:text="Breaking news!" />
+
+            <TextView
+                style="@style/NewsItemBreakingSubtitleStyle"
+                android:id="@+id/breaking_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{item.subtitle}"
+                android:visibility="@{TextUtils.isEmpty(item.subtitle) ? View.GONE : View.VISIBLE}"
+                tools:text="Something shocking has happened. Stay tuned and keep safe. We will inform you" />
+
+            <TextView
+                style="@style/NewsItemBreakingDateStyle"
+                android:id="@+id/breaking_date"
+                timeAgo="@{item.lastModified}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="@{TextUtils.isEmpty(item.lastModified) ? View.GONE : View.VISIBLE}"
+                tools:text="2 hours ago" />
+
+        </LinearLayout>
+    </FrameLayout>
+</layout>

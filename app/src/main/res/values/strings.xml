@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Simple Newsfeed</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </string>
+    <string name="type_ad">Ad</string>
+    <string name="ago_now">Just now</string>
+    <string name="ago_1minute">A minute ago</string>
+    <string name="ago_minutes">%d minutes ago</string>
+    <string name="ago_1hour">An hour ago</string>
+    <string name="ago_hours">%d hours ago</string>
+    <string name="ago_1day">Yesterday</string>
+    <string name="ago_days">%d days ago</string>
+</resources>
